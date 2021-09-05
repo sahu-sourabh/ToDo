@@ -1,0 +1,84 @@
+{% extends 'app/layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="container px-4">
+
+        <div class="row gx-5">
+            <div class="p-3 border bg-light">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <h2>Hi, {{ request.user }} :</h2>
+            </div>
+        </div>
+
+        <div class="row gx-5">
+            <div class="p-3 border bg-light">
+                <h6>Add New Task</h6>
+
+                <form action="/addTodo/" method="POST">
+                    {% csrf_token %}
+                    {{ form.title|as_crispy_field }}
+                    <input class="mt-2" type="submit" value="Submit">
+                </form>
+                
+            </div>           
+        </div>
+
+        <div class="row gx-5">
+            <div class="p-3 border bg-light">
+                {% if tasks|length == 0 %}
+                    <div>
+                        <div class="alert alert-success text-center" role="alert">
+                            No Todos!
+                        </div>
+                    </div>
+                {% else %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in tasks %}
+                                <tr>
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td>
+                                        {% if task.status == True %}
+                                            <strike>{{ task.title }}</strike>
+                                        {% else %}
+                                            <span>{{ task.title }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <!-- <td>{{ task.status }}</td> -->
+                                    <td>
+                                        {% if task.status == False %}
+                                            <a href="/changeStatus/{{ task.id }}/{{ task.status }}/" title="Mark Complete">✅</a>
+                                        {% else %}
+                                            <a href="/changeStatus/{{ task.id }}/{{ task.status }}/" title="Mark Pending">🕑</a>
+                                        {% endif %}
+                                    </td>
+                                    <td><a href="/deleteTodo/{{ task.id }}" title="Delete">🗑️</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+        
+
+{% endblock content %}

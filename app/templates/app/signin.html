@@ -1,0 +1,27 @@
+{% extends 'app/layout.html' %}
+
+{% block content %}
+{% load crispy_forms_filters %}
+
+    <div class="container pt-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <h2>Log In</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ forms|crispy }}
+            <input type="submit" value="Log In">
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Need An Account? <a class="ml-2" href="{% url 'signup' %}">Sign Up</a>
+            </small>
+        </div>
+    </div>
+
+{% endblock content %}
