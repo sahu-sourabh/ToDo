@@ -1,0 +1,42 @@
+{% extends 'app/layout.html' %}
+
+{% block content %}
+
+    <div class="container px-4">
+
+        <div class="row gx-5">
+            <div class="p-3 border bg-light">
+                <div class="container">
+                    <img class="rounded-circle account-img" src="{{ user.profilemodel.profile_pic.url }}">
+                    <div class="text-container">
+                        <h2>Hi, {{ request.user|title }} :</h2>
+                        <h3>You have {{ inc_count }} incomplete Task out of {{ tasks|length }} Tasks.</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row gx-5">
+            <div class="p-3 border bg-light">
+
+                <form action="{% url 'searchTask' %}" method="POST">
+                    {% csrf_token %}
+                    <input class="mt-2" type="text" name="q" value="{{ results.title }}" placeholder="Search...">
+                    <input class="mt-2" type="submit" value="Search">
+                </form>
+                
+            </div>           
+        </div>
+
+       
+        {% if results %}
+            {% for result in results %}
+                {{ result.title }}
+            {% endfor %}
+        {% else %}
+            <center><h4>No Matching Search</h4></center>
+        {% endif %}
+
+    </div>
+
+{% endblock content %}

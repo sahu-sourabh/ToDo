@@ -21,7 +21,11 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('signout/', views.signout, name='signout'),
     path('home/', views.home, name='home'),
-    path('addTodo/', views.addTodo, name='addTodo'),
-    path('deleteTodo/<int:pk>/', views.deleteTodo, name='deleteTodo'),
+    path('addTask/', views.addTask, name='addTask'),
+    path('updateTask/<int:pk>/', views.updateTask, name='updateTask'),
+    path('deleteTask/<int:pk>/', views.deleteTask, name='deleteTask'),
     path('changeStatus/<int:pk>/<str:status>/', views.changeStatus, name='changeStatus'),
+    path('searchTask/', views.searchTask, name='searchTask'),
+    path('profile/', views.profile, name='profile'),
+    path('changePassword/', views.changePassword, name='changePassword'),
 ]

@@ -1,0 +1,20 @@
+{% extends 'app/layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="content-section">
+        <form action="#" method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">                
+                <legend class="border-bottom mb-4">
+                    Add Task
+                    <a class="btn btn-outline-primary" style="float: right;" href="{% url 'home' %}" title="Back">&#8592;</a>
+                </legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-primary" type="submit">Add</button>                
+            </div>
+        </form>
+    </div>
+{% endblock content %}
