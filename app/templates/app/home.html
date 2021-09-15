@@ -16,7 +16,7 @@
                 <img class="rounded-circle account-img" src="{{ user.profilemodel.profile_pic.url }}" alt="profile_pic">
                 <div class="text-container">
                     <h2>Hi, {{ request.user|title }} :</h2>
-                    <h3>You have {{ inc_count }} task in progress</h3>
+                    <h3>You have {{ inc_count }} task{{ inc_count|pluralize:"s" }} in progress</h3>
                 </div>
             </div>                    
         </div>
