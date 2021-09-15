@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="content-section px-4 row">
+    <div class="content-section px-0 row">
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">
@@ -26,8 +26,8 @@
                 {% csrf_token %}
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4">Profile Info</legend>
-                    {{ u_form|crispy }}
-                    {{ p_form|crispy }}
+                    {{ user_form|crispy }}
+                    {{ profile_form|crispy }}
                     <a class="btn btn-outline-secondary mt-1" href="{% url 'changePassword' %}">Change Password</a>
                 </fieldset>
                 <div class="form-group mt-1">

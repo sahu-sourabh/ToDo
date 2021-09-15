@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="container px-4 row">
+    <div class="content-section px-0 row">
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">
@@ -12,7 +12,7 @@
         {% endif %}
         <div class="container mt-3">
             <div class="media">
-                <a href="{% url 'addTask' %}" class="btn btn-outline-primary" style="float: right;" title="Add New Task">&#43;</a>
+                <a href="{% url 'addTask' %}" class="btn btn-outline-primary" style="float: right; text-decoration: none;" title="Add New Task">&#43;</a>
                 <img class="rounded-circle account-img" src="{{ user.profilemodel.profile_pic.url }}" alt="profile_pic">
                 <div class="text-container">
                     <h2>Hi, {{ request.user|title }} :</h2>
@@ -28,7 +28,7 @@
             </div>
         {% else %}
             <div class="container">
-                <table class="table">
+                <table class="table table-hover table-sm">
                     <thead>
                         <tr>
                             <th scope="col" class="text-center">#</th>
@@ -50,12 +50,12 @@
                                 </td>
                                 <td class="text-center">
                                     {% if task.status == False %}
-                                        <a href="{% url 'changeStatus' task.id task.status %}" title="Done" style="color: green;">&#10003;</a>
+                                        <a href="{% url 'changeStatus' task.id task.status %}" title="Mark Done" style="color: green; text-decoration: none; font-size: 20px;">&#10003;</a>
                                     {% else %}
-                                        <a href="{% url 'changeStatus' task.id task.status %}" title="In Progress" style="color: rgb(205, 169, 50);">&#10227;</a>
+                                        <a href="{% url 'changeStatus' task.id task.status %}" title="Mark In Progress" style="color: rgb(205, 169, 50); text-decoration: none; font-size: 20px;">&#10227;</a>
                                     {% endif %}
                                 </td>
-                                <td class="text-center"><a href="{% url 'deleteTask' task.id %}" title="Delete" style="color: red; text-align: center;">&#215;</a></td>
+                                <td class="text-center"><a href="{% url 'deleteTask' task.id %}" title="Delete" style="color: red; text-align: center; text-decoration: none; font-size: 22px;">&#215;</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>

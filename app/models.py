@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from PIL import Image
+from cloudinary.models import CloudinaryField
 
 class TaskModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -15,19 +15,8 @@ class TaskModel(models.Model):
 
 class ProfileModel(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    date_of_birth = models.DateField()
-    profile_pic = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    date_of_birth = models.DateField(null=True, blank=True)
+    profile_pic = CloudinaryField('profile_pic')
     
     def __str__(self):
         return f'{self.user.username} Profile'
-
-    # Automatic image resize while uploading
-    def save(self, *args, **kawrgs):
-        super().save(*args, **kawrgs)
-
-        img = Image.open(self.profile_pic.path)
-
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.profile_pic.path)

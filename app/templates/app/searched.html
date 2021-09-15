@@ -1,9 +1,7 @@
 {% extends 'app/layout.html' %}
 
 {% block content %}
-
-    <div class="container px-4">
-
+    <div class="content-section px-0 row">
         <div class="row gx-5">
             <div class="p-3 border bg-light">
                 <div class="container">
@@ -14,21 +12,16 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
+        </div>        
         <div class="row gx-5">
             <div class="p-3 border bg-light">
-
                 <form action="{% url 'searchTask' %}" method="POST">
                     {% csrf_token %}
                     <input class="mt-2" type="text" name="q" value="{{ results.title }}" placeholder="Search...">
                     <input class="mt-2" type="submit" value="Search">
-                </form>
-                
+                </form>                
             </div>           
-        </div>
-
-       
+        </div>       
         {% if results %}
             {% for result in results %}
                 {{ result.title }}
@@ -36,7 +29,5 @@
         {% else %}
             <center><h4>No Matching Search</h4></center>
         {% endif %}
-
     </div>
-
 {% endblock content %}

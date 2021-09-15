@@ -121,21 +121,20 @@ def searchTask(request):
 @login_required(login_url='signin')
 def profile(request):
     if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUdateForm(request.POST, request.FILES, instance=request.user.profilemodel)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = ProfileUdateForm(request.POST, request.FILES, instance=request.user.profilemodel)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('profile')
     else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUdateForm(instance=request.user.profilemodel)
-    context = {
-        'u_form': u_form,
-        'p_form': p_form
-    }
-    return render(request, 'app/profile.html', context)
+        user_form = UserUpdateForm(instance=request.user)
+        profile_form = ProfileUdateForm(instance=request.user.profilemodel)
+    return render(request, 'app/profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
 
 # Change password with OLD password
 @login_required(login_url='signin')

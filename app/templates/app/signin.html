@@ -2,20 +2,25 @@
 
 {% block content %}
 {% load crispy_forms_filters %}
-
-    <div class="container pt-4">
+    <div class="content-section px-0 row">
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">
                     {{ message }}
                 </div>
             {% endfor %}
-        {% endif %}
-        <h2>Log In</h2>
-        <form action="" method="post">
+        {% endif %}      
+        <form action="" method="POST">
             {% csrf_token %}
-            {{ forms|crispy }}
-            <input type="submit" value="Log In">
+            <fieldset class="form-group">                
+                <legend class="border-bottom mb-4">                    
+                    Log In
+                </legend>
+                {{ forms|crispy }}
+            </fieldset>
+            <div class="form-group my-2">
+                <button class="btn btn-outline-primary" type="submit">Log In</button>                
+            </div>
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
@@ -23,5 +28,4 @@
             </small>
         </div>
     </div>
-
 {% endblock content %}
