@@ -43,9 +43,9 @@
                                 <th scope="row" class="text-center">{{ forloop.counter }}</th>
                                 <td>
                                     {% if task.status == True %}
-                                        <strike><a href="{% url 'updateTask' task.id %}" style="color: #5674a5;">{{ task.title }}</a></strike>
+                                        <strike><a href="{% url 'updateTask' task.id %}" title="Update Task" style="color: #5674a5;">{{ task.title }}</a></strike>
                                     {% else %}
-                                        <span><a href="{% url 'updateTask' task.id %}" style="color: #5674a5;">{{ task.title }}</a></span>
+                                        <span><a href="{% url 'updateTask' task.id %}" title="Update Task" style="color: #5674a5;">{{ task.title }}</a></span>
                                     {% endif %}
                                 </td>
                                 <td class="text-center">
